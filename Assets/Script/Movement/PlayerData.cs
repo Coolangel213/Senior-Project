@@ -6,7 +6,8 @@ using Vector3 = UnityEngine.Vector3;
 public class PlayerData {
     
     [Header("Player Data")]
-    public float MoveSpeed;
+    public float Ground_Acceleration;
+    public float max_Ground_Speed;
     public float JumpForce;
     public float CrounchSpeed; 
     public bool isGrounded = true;
