@@ -5,11 +5,15 @@ public class Camerafollow {
     public float dampingSpeed;
     public float SmoothingSpeed;
 
-    private Transform target;
-    private Vector2 oldPosition;
+    private GameObject target;
+
+    public Camerafollow(GameObject FollowTarget)
+    {
+        target = FollowTarget;
+    }
 
     public void CamFollowUpdateProcess()
     {
-
+        
     }
 }   

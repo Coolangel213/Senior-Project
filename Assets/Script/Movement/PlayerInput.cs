@@ -20,7 +20,7 @@ public class PlayerInput : MonoBehaviour
             playerData.Buttons &= ~InputButtons.Duck;
         
         //Jump
-        if(Input.GetKeyDown(playerData.Jump))
+        if(Input.GetKey(playerData.Jump))
              playerData.Buttons |= InputButtons.Jump;
         else
             playerData.Buttons &= ~InputButtons.Jump;

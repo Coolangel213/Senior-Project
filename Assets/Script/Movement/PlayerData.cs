@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Vector3 = UnityEngine.Vector3;
 
 [Serializable]
 public class PlayerData {
@@ -8,11 +7,19 @@ public class PlayerData {
     [Header("Player Data")]
     public float Ground_Acceleration;
     public float max_Ground_Speed;
+    public float Crouch_Accel;
+    public float max_Crouch_Speed; 
     public float JumpForce;
-    public float CrounchSpeed; 
+    public float fallMultiplier;
+    public float lowJumpMultiplier;
     public bool isGrounded = true;
     public LayerMask Ground;
-    
+
+    [Header("Physics")]
+    public float GravityValue = -9.81f;
+    public float GravityScale = 20f;
+    [HideInInspector]public float gravityMultiplier = 1f;
+
 
     [Header("Input Data")]
     public float horizontalAxis = 0f;
@@ -23,6 +30,6 @@ public class PlayerData {
     public InputButtons Buttons;
     public InputButtons OldButtons;
 
-    [Header("Movement Data")]
-    public Vector3 _playerVel;
+    [Header("Other")]
+    public Vector2 PlayerVelocity;
 }

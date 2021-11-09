@@ -159,7 +159,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 10
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -271,14 +271,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerdata:
-    Ground_Acceleration: 1000
-    max_Ground_Speed: 100
-    JumpForce: 0
-    CrounchSpeed: 0
+    Ground_Acceleration: 750
+    max_Ground_Speed: 9
+    Crouch_Accel: 500
+    max_Crouch_Speed: 5
+    JumpForce: 5
+    fallMultiplier: 2.5
+    lowJumpMultiplier: 2
     isGrounded: 1
     Ground:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 8
+    GravityValue: -9.81
+    GravityScale: 20
     horizontalAxis: 0
     Duck: 115
     Jump: 32
@@ -286,7 +291,7 @@ MonoBehaviour:
     Restart: 114
     Buttons: 0
     OldButtons: 0
-    _playerVel: {x: 0, y: 0, z: 0}
+    PlayerVelocity: {x: 0, y: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,7 +386,7 @@ GameObject:
   - component: {fileID: 897422400}
   - component: {fileID: 897422399}
   - component: {fileID: 897422398}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
