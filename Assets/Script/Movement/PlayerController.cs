@@ -1,3 +1,4 @@
+using System;
 using System.Data.Common;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,6 +24,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerMovement.UpdateInput();
+        
         switch(playerdata.Buttons)
         {
             case InputButtons.Duck:
@@ -38,18 +41,23 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
+
     private void FixedUpdate() {
         //Update Movement Process 
         playerMovement.UpdateMoveProcess();
 
     }
 
+
     private void OnCollisionStay2D(Collision2D coll)
     {
-        Debug.Log(coll.gameObject.layer.CompareTo(playerdata.Ground.value));
         //true = -1; false = 1
         if(coll.gameObject.layer.CompareTo(playerdata.Ground.value) < 0)
             playerdata.isGrounded = true;
     }
-    
+    internal void initJumpDelay()
+    {
+        Invoke("canJump", playerdata.delaybetweenJump);
+    }
+    void canJump() => playerdata.canJump = true;
 }

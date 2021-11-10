@@ -19,22 +19,26 @@ public class Movement
         CalculateVelocity();
 
         if(data.PlayerVelocity.y < 0 && data.isGrounded)
-        {
             data.PlayerVelocity.y = 0f;
-            data.gravityMultiplier = 1f;
-        }
 
-        if(data.Buttons.HasFlag(InputButtons.Jump) && data.isGrounded)
+        if(data.Buttons.HasFlag(InputButtons.Jump) && data.isGrounded && data.canJump)
             Jump();
 
-        ApplyGravity();
+        ApplyJumpGravity();
         rb.MovePosition(rb.position + data.PlayerVelocity * Time.fixedDeltaTime);
     }
 
+    public void UpdateInput()
+    {
+        data.horizontalAxis = Input.GetAxis("Horizontal");
+
+    }
     private void Jump()
     {
         data.isGrounded = false;
-        data.PlayerVelocity = Vector2.up * data.JumpForce;
+        data.canJump = false;
+        data.PlayerVelocity.y = data.JumpForce;
+        PlayerController.instance.initJumpDelay();
     }
 
     public void CalculateVelocity()
@@ -65,19 +69,15 @@ public class Movement
         }
         data.PlayerVelocity = new Vector2(x, data.PlayerVelocity.y);
     }
-    public void ApplyGravity()
+    public void ApplyJumpGravity()
     {
-        data.PlayerVelocity.y += data.GravityValue * data.GravityScale * data.gravityMultiplier * Time.deltaTime;
-
-        if(rb.velocity.y < 0)
+        if(data.PlayerVelocity.y < 0)
         {
-            data.PlayerVelocity += Vector2.up * (data.GravityValue * data.GravityScale) * (data.fallMultiplier - 1) * Time.deltaTime;
-            data.gravityMultiplier = (Time.fixedTime/Time.deltaTime) / 10;
-        }
-        else if(rb.velocity.y > 0 && data.Buttons.HasFlag(InputButtons.Jump) == false)
+            data.PlayerVelocity += Vector2.up * Physics2D.gravity.y * (data.fallMultiplier - 1) * Time.deltaTime;
+        }   
+        else if(data.PlayerVelocity.y > 0 && !Input.GetButton("Jump"))
         {
-            data.PlayerVelocity += Vector2.up * (data.GravityValue * data.GravityScale) * (data.lowJumpMultiplier - 1) * Time.deltaTime;
-            data.gravityMultiplier = (Time.fixedTime/Time.deltaTime) / 10;
+            data.PlayerVelocity += Vector2.up * Physics2D.gravity.y * (data.lowJumpMultiplier - 1) * Time.deltaTime;
         }
     }
 }

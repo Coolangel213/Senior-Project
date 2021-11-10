@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 127386801}
   - component: {fileID: 127386800}
   - component: {fileID: 127386805}
-  - component: {fileID: 127386804}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -159,7 +158,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -246,18 +245,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &127386804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 127386799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f82339d2df35f4ee191b33507379c046, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &127386805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,14 +263,14 @@ MonoBehaviour:
     Crouch_Accel: 500
     max_Crouch_Speed: 5
     JumpForce: 5
+    delaybetweenJump: 0.5
+    canJump: 1
     fallMultiplier: 2.5
     lowJumpMultiplier: 2
     isGrounded: 1
     Ground:
       serializedVersion: 2
       m_Bits: 8
-    GravityValue: -9.81
-    GravityScale: 20
     horizontalAxis: 0
     Duck: 115
     Jump: 32

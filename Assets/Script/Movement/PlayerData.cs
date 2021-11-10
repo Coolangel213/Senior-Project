@@ -10,16 +10,12 @@ public class PlayerData {
     public float Crouch_Accel;
     public float max_Crouch_Speed; 
     public float JumpForce;
+    public float delaybetweenJump = .5f;
+    public bool canJump = true;
     public float fallMultiplier;
     public float lowJumpMultiplier;
     public bool isGrounded = true;
     public LayerMask Ground;
-
-    [Header("Physics")]
-    public float GravityValue = -9.81f;
-    public float GravityScale = 20f;
-    [HideInInspector]public float gravityMultiplier = 1f;
-
 
     [Header("Input Data")]
     public float horizontalAxis = 0f;
