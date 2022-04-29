@@ -23,14 +23,15 @@ public class Player : MonoBehaviour {
 	bool wishJump;
 	private void Update() {
 		wishJump = Input.GetKey(KeyCode.Space);
-		Debug.Log(wishJump);
 		horizontal = Input.GetAxisRaw("Horizontal");
+
+		if(Input.GetKeyDown(KeyCode.Space))
+			SoundManager.PlaySound(SoundManager.Sound.jump);
 	}
 	void FixedUpdate ()
 	{
-		isGround = Physics2D.OverlapCircle (groundCheck.position, 0.3f, whatIsGround);
+		isGround = Physics2D.OverlapCircle(groundCheck.position, .3f, whatIsGround);
 		myrigidbody.velocity = new Vector2 (horizontal * movementspeed, myrigidbody.velocity.y);
-
 
 		if(wishJump && isGround == true)
 		{
@@ -58,6 +59,8 @@ public class Player : MonoBehaviour {
 	{
 		myrigidbody.bodyType = RigidbodyType2D.Static;
 		PanelLose.SetActive (true);
+		SoundManager.PlaySound(SoundManager.Sound.Lose);
+		GameAssets.i.DestroyAllAudioSources();
 		Destroy (gameObject);
 	}
 
@@ -81,6 +84,18 @@ public class Player : MonoBehaviour {
 		if (col.tag == "Portal")
 		{
 			Finish ();
+		}
+	}
+
+	private void OnCollisionEnter(Collision col) {
+
+		if(col.collider.tag == "Ground")
+		{
+			isGround = true;
+		}
+		else
+		{
+			isGround = false;
 		}
 	}
 }
