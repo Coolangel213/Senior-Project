@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
 	private float movementspeed = 10f;
 	[SerializeField]
 	private float jumpheigt = 10f;
+	public float fallmultiplier = 1.25f;
 	private bool isGround;
 	private bool facing = true;
 	private float horizontal;
@@ -15,9 +16,11 @@ public class Player : MonoBehaviour {
 	public LayerMask whatIsGround;
 	public GameObject PanelLose;
 	public GameObject PanelWin;
+
 	void Start ()
 	{
 		myrigidbody = GetComponent<Rigidbody2D> ();
+		SoundManager.PlaySound(SoundManager.Sound.levelMusic);
 	}
 
 	bool wishJump;
@@ -27,6 +30,11 @@ public class Player : MonoBehaviour {
 
 		if(Input.GetKeyDown(KeyCode.Space))
 			SoundManager.PlaySound(SoundManager.Sound.jump);
+		
+		if(myrigidbody.velocity.y > 0f)
+		{
+			myrigidbody.velocity += Vector2.up * Physics2D.gravity.y * (fallmultiplier - 1) * Time.deltaTime;
+		}
 	}
 	void FixedUpdate ()
 	{

@@ -11,7 +11,7 @@ public static class SoundManager
         button,
         Lose
     }
-
+    
     public static void PlaySound(Sound sound)
     {
         GameObject soundObject = new GameObject("Sound");

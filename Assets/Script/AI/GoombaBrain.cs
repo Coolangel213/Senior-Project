@@ -7,7 +7,7 @@ public class GoombaBrain : MonoBehaviour
     public float speed = 5f;
     private bool isMovingRight = true;
     public Transform groundDetection;
-
+    public LayerMask whatisGround;
     // Update is called once per frame
     void Update()
     {
@@ -15,7 +15,7 @@ public class GoombaBrain : MonoBehaviour
         transform.Translate(Vector2.right * speed * Time.deltaTime);
 
         //Ground Detection
-        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, 10f);
+        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, 10f, whatisGround);
 
         //Is Ground Check hiting ground? No then we must turn the other direction
         if(!groundInfo.collider)
